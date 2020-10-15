@@ -19,6 +19,8 @@ import { Jelly } from '@features/children/jelly/Jelly'
 import { Transition } from '@features/children/transition/Transition'
 import { WavyLoading } from '@features/children/wavyLoading/WavyLoading'
 import { Telegram } from '@features/children/telegram/Telegram'
+import { CircleMenu } from '@features/children/circleMenu/CircleMenu'
+import { ShareElement } from '@features/children/shareElement/ShareElementRoute'
 
 const MainStack = createStackNavigator()
 const styles = StyleSheet.create({
@@ -72,12 +74,19 @@ const telegramOption: StackNavigationOptions = {
     headerTitle: "Telegram Header",
     headerShown: false
 }
+const shareElementMenuOption: StackNavigationOptions = {
+    headerTitle: "Share Element"
+}
+const circleMenuOption: StackNavigationOptions = {
+    headerTitle: "Circle Menu"
+}
+
 const AppNavigationComponent = () => {
     useEffect(() => {
         SplashScreen.hide()
     }, [])
     return (
-        <NavigationContainer ref={navigationRef}>
+        <NavigationContainer ref={navigationRef} >
             <StatusBar backgroundColor={APP_COLOR} barStyle={'light-content'} />
             <MainStack.Navigator screenOptions={{ gestureEnabled: true, headerShown: true, headerTintColor: "white", ...TransitionPresets.SlideFromRightIOS }}>
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, mainOption])} name={APP_SCREEN.MAIN} component={Main} />
@@ -91,6 +100,8 @@ const AppNavigationComponent = () => {
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, transitionOption])} name={APP_SCREEN.TRANSITION} component={Transition} />
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, wavyOption])} name={APP_SCREEN.WAVY} component={WavyLoading} />
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, telegramOption])} name={APP_SCREEN.TELEGRAM} component={Telegram} />
+                <MainStack.Screen options={StyleSheet.flatten([baseOption, circleMenuOption])} name={APP_SCREEN.CIRCLE_MENU} component={CircleMenu} />
+                <MainStack.Screen options={StyleSheet.flatten([baseOption, shareElementMenuOption, { gestureEnabled: false }])} name={APP_SCREEN.SHARE_ELEMENT} component={ShareElement} />
             </MainStack.Navigator>
         </NavigationContainer>
     )
