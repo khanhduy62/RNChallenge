@@ -1,4 +1,4 @@
-import Animated, { Clock, Value, cond, or, eq, block, spring, startClock, clockRunning } from "react-native-reanimated";
+import Animated, { Clock, Value, cond, or, eq, block, spring, startClock, clockRunning, set, max, min as min1, add, defined, diff, neq, EasingNode, stopClock, timing } from "react-native-reanimated";
 import { State } from "react-native-gesture-handler";
 
 
@@ -137,3 +137,51 @@ export const snapPoint = (
         0
     );
 };
+export const diffClamp = (
+    a: Animated.Node<number>,
+    minVal: Animated.Adaptable<number>,
+    maxVal: Animated.Adaptable<number>
+) => {
+    const value = new Value<number>();
+    return set(
+        value,
+        min1(max(add(cond(defined(value), value, a), diff(a)), minVal), maxVal)
+    );
+};
+export type TimingConfig = Partial<Omit<Animated.TimingConfig, 'toValue'>>;
+export const withTransition = (
+    value: Animated.Node<number>,
+    timingConfig: TimingConfig = {},
+    gestureState: Animated.Value<State> = new Value(State.UNDETERMINED),
+  ) => {
+    const clock = new Clock();
+    const state = {
+      finished: new Value(0),
+      frameTime: new Value(0),
+      position: new Value(0),
+      time: new Value(0),
+    };
+    const config = {
+      toValue: new Value(0),
+      duration: 250,
+      easing: EasingNode.linear,
+      ...timingConfig,
+    };
+    return block([
+      startClock(clock),
+      cond(neq(config.toValue, value), [
+        set(state.frameTime, 0),
+        set(state.time, 0),
+        set(state.finished, 0),
+        set(config.toValue, value),
+        startClock(clock),
+      ]),
+      cond(
+        eq(gestureState, State.ACTIVE),
+        [set(state.position, value)],
+        timing(clock, state, config),
+      ),
+      cond(state.finished, stopClock(clock)),
+      state.position,
+    ]);
+  };

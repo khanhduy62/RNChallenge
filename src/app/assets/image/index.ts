@@ -47,7 +47,10 @@ export const images = {
     wavy: require('./source/wavy.png'),
     telegram: require('./source/telegram.png'),
     menu: require('./source/menu.png'),
-    share_element: require('./source/share_element.png')
+    share_element: require('./source/share_element.png'),
+    you_tube: require('./source/youtube.png'),
+    wave: require('./source/wave.png'),
+    indicator: require('./source/indicator.png')
 };
 
 export type ImageTypes = keyof typeof images;

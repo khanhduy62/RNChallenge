@@ -21,6 +21,9 @@ import { WavyLoading } from '@features/children/wavyLoading/WavyLoading'
 import { Telegram } from '@features/children/telegram/Telegram'
 import { CircleMenu } from '@features/children/circleMenu/CircleMenu'
 import { ShareElement } from '@features/children/shareElement/ShareElementRoute'
+import { You_tube } from '@features/children/youtube/Youtube'
+import { Wave } from '@features/children/wave/Wave'
+import { Indicator } from '@features/children/indicator/Indicator'
 
 const MainStack = createStackNavigator()
 const styles = StyleSheet.create({
@@ -75,12 +78,21 @@ const telegramOption: StackNavigationOptions = {
     headerShown: false
 }
 const shareElementMenuOption: StackNavigationOptions = {
-    headerTitle: "Share Element"
+    headerTitle: "Share Element",
+    headerShown: false
 }
 const circleMenuOption: StackNavigationOptions = {
     headerTitle: "Circle Menu"
 }
-
+const youtubeOption: StackNavigationOptions = {
+    headerTitle: "Youtube Transition"
+}
+const waveOption: StackNavigationOptions = {
+    headerTitle: "Wave Transition"
+}
+const indicatorOption: StackNavigationOptions = {
+    headerTitle: "Indicator Animation"
+}
 const AppNavigationComponent = () => {
     useEffect(() => {
         SplashScreen.hide()
@@ -102,6 +114,9 @@ const AppNavigationComponent = () => {
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, telegramOption])} name={APP_SCREEN.TELEGRAM} component={Telegram} />
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, circleMenuOption])} name={APP_SCREEN.CIRCLE_MENU} component={CircleMenu} />
                 <MainStack.Screen options={StyleSheet.flatten([baseOption, shareElementMenuOption, { gestureEnabled: false }])} name={APP_SCREEN.SHARE_ELEMENT} component={ShareElement} />
+                <MainStack.Screen options={StyleSheet.flatten([baseOption, youtubeOption])} name={APP_SCREEN.YOU_TUBE} component={You_tube} />
+                <MainStack.Screen options={StyleSheet.flatten([baseOption, waveOption])} name={APP_SCREEN.WAVE} component={Wave} />
+                <MainStack.Screen options={StyleSheet.flatten([baseOption, indicatorOption])} name={APP_SCREEN.INDICATOR} component={Indicator} />
             </MainStack.Navigator>
         </NavigationContainer>
     )
