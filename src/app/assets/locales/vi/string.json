@@ -60,6 +60,8 @@
             "txTitle": "Youtube Transition"
         },
         "wave":"Wave",
-        "indicator":"Indicator"
+        "indicator":"Indicator",
+        "worm":"Worm Pagination",
+        "textTicker":"Text Ticker"
     }
 }
