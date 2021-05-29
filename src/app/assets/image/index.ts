@@ -52,7 +52,10 @@ export const images = {
     wave: require('./source/wave.png'),
     indicator: require('./source/indicator.png'),
     worm: require('./source/worm.png'),
-    text: require('./source/text.png')
+    text: require('./source/text.png'),
+    sticky: require('./source/sticky.png'),
+    inside_view: require('./source/inside-view.png'),
+    firework: require('./source/firework.png'),
 };
 
 export type ImageTypes = keyof typeof images;
